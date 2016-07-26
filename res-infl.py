@@ -79,15 +79,15 @@ print('R2: ', res.rsquared)
 # fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 
 #FIT PLOT
-fig, ax = plt.subplots(figsize=(12, 8))
-fig = sm.graphics.plot_fit(res, "x1", ax=ax)
+# fig, ax = plt.subplots(figsize=(12, 8))
+# fig = sm.graphics.plot_fit(res, "x2", ax=ax)
 
 # fig = sm.graphics.plot_fit(res, "x2", ax=ax)
 #LEVERAGE RESID 2
 
 
-# fig, ax = plt.subplots(figsize=(8,6))
-# fig = sm.graphics.plot_leverage_resid2(res, ax=ax)
+fig, ax = plt.subplots(figsize=(8,6))
+fig = sm.graphics.plot_leverage_resid2(res, ax=ax)
 
 
 
@@ -114,9 +114,9 @@ fig = sm.graphics.plot_fit(res, "x1", ax=ax)
 # ax.plot(x, iv_l, 'r--')
 # legend = ax.legend(loc="best")
 	
-# ax.set_ylabel("RESIDUOS ESTUDANTIZADOS")
-# ax.set_xlabel("INFLUENCIA H")
-# ax.set_title("PLOTAGEM DE INFLUENCIA")
+ax.set_ylabel("Influencia")
+ax.set_xlabel("Residuos normalizados ** 2")
+ax.set_title("PLOTAGEM DE INFLUENCIA vs. Residuos normalizados ao quadrado")
 
  
 

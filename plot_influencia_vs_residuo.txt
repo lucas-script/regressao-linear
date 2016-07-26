@@ -1,0 +1,1 @@
+Grafico que relaciona a influencia das observações ao residuo normalizado quadrado de cada qual
