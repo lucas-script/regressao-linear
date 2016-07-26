@@ -42,8 +42,8 @@ y=ipca
 # x = np.column_stack((indicePrecosImportacoes,taxaCambioComercialVenda,taxaCambioComercialCompra,taxaCambioRealEfetivaImportacoes,
 	# taxaCambioRealEfetivaExportacoes,exportacoesFob))
 
-x = np.column_stack((igp,ipa,incc,ipc,taxaCambioComercialCompra,taxaCambioComercialVenda,
-	indicePrecosImportacoes, taxaCambioRealEfetivaExportacoes, taxaCambioRealEfetivaImportacoes,indiceCestaBasicaSP ))
+x = np.column_stack((igp,ipa,incc,ipc,indiceCestaBasicaSP,taxaCambioComercialCompra,taxaCambioComercialVenda,
+	indicePrecosImportacoes ))
 
 x = sm.add_constant(x, prepend=True) 
 
@@ -71,12 +71,12 @@ print('R2: ', res.rsquared)
 # ax.legend(loc='best');
 
 #PLOTAGEM INFLUENCIA
-#fig, ax = plt.subplots(figsize=(12,8))
-#fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
+fig, ax = plt.subplots(figsize=(12,8))
+fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 
 #PART REGRESS
-# fig = plt.figure(figsize=(12,8))
-# fig = sm.graphics.plot_partregress_grid(res, fig=fig)
+fig = plt.figure(figsize=(12,8))
+fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 
 #LEVERAGE RESID 2
 # fig, ax = plt.subplots(figsize=(8,6))
