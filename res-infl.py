@@ -2,11 +2,14 @@ import numpy as np
 import statsmodels.api as sm
 
 from statsmodels.formula.api import ols
+
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+
 import matplotlib.pyplot as plt
 import pylab
 
+ipca = [1.24, 1.22, 1.32, 0.71, 0.74, 0.79, 0.62, 0.22, 0.54, 0.82, 1.01, 0.96]
 igp =           [0.67, 0.53, 1.21, 0.92, 0.40, 0.68, 0.58, 0.40, 1.42, 1.76, 1.19, 0.44]
-y=igp
 
 ipa =           [0.23, 0.41, 0.37, 1.11, 0.19, 0.43, 0.61, 0.44, 2.02, 2.38, 1.41, 0.33]
 
@@ -30,25 +33,87 @@ taxaCambioRealEfetivaImportacoes =  [113.146773201727, 119.820835388654, 130.239
 taxaCambioComercialCompra =         [2.633619048, 2.815838889, 3.138863636, 3.042595, 3.061075, 3.11112381, 3.222508696, 3.513695238, 3.905809524, 3.879504762, 3.7758, 3.870495455]
 taxaCambioComercialVenda =          [2.634228571, 2.81645, 3.139477273, 3.04322, 3.061715, 3.111738095, 3.223143478, 3.514304762, 3.906457143, 3.880138095, 3.77646, 3.871136364]
 
-x = np.column_stack((ipa,incc,cestaBasicaSP,ipc,dividaLiqSetorPublico,indiceBovespa,m1,m2,m3,m4,dividaLiqExternaSetorPublico,exportacoesFob,indicePrecosImportacoes,
-reservasInternacionais,taxaCambioRealEfetivaImportacoes,taxaCambioRealEfetivaExportacoes,taxaCambioComercialCompra,taxaCambioComercialVenda))
+# x = np.column_stack((ipa,incc,cestaBasicaSP,ipc,dividaLiqSetorPublico,indiceBovespa,m1,m2,m3,m4,dividaLiqExternaSetorPublico,exportacoesFob,indicePrecosImportacoes,
+# reservasInternacionais,taxaCambioRealEfetivaImportacoes,taxaCambioRealEfetivaExportacoes,taxaCambioComercialCompra,taxaCambioComercialVenda))
+
+y=cestaBasicaSP
+x = np.column_stack((indicePrecosImportacoes,taxaCambioComercialVenda,taxaCambioComercialCompra,taxaCambioRealEfetivaImportacoes,
+	taxaCambioRealEfetivaExportacoes,exportacoesFob))
 
 x = sm.add_constant(x, prepend=True) 
+
 res = sm.OLS(y,x).fit() 
+
+# data=[x.igp]
+# res = ols('y~x',data).fit()
 
 print res.params
 print res.bse
 print res.summary()
 
-fig, ax = plt.subplots(figsize=(12,8))
-fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
+print('Parameters: ', res.params)
+print('R2: ', res.rsquared)
+
+# prstd, iv_l, iv_u = wls_prediction_std(res)
+
+# fig, ax = plt.subplots(figsize=(8,6))
+
+# ax.plot(x, y, 'o', label="data")
+# ax.plot(x, y, 'b-', label="True")
+# ax.plot(x, res.fittedvalues, 'r--.', label="OLS")
+# ax.plot(x, iv_u, 'r--')
+# ax.plot(x, iv_l, 'r--')
+# ax.legend(loc='best');
+
+#PLOTAGEM INFLUENCIA
+# fig, ax = plt.subplots(figsize=(12,8))
+# fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
+
+#PART REGRESS
+# fig = plt.figure(figsize=(12,8))
+# fig = sm.graphics.plot_partregress_grid(res, fig=fig)
+
+#LEVERAGE RESID 2
+# fig, ax = plt.subplots(figsize=(8,6))
+# fig = sm.graphics.plot_leverage_resid2(res, ax=ax)
+
+
+#FIT PLOT
+# fig, ax = plt.subplots(figsize=(12, 8))
+# fig = sm.graphics.plot_fit(res, "x1", ax=ax)
+
+# ou
+
+
 
 # fig, ax = plt.subplots()
 # fig = sm.graphics.plot_fit(res, 2, ax=ax)
-# ax.set_ylabel("Murder Rate")
-# ax.set_xlabel("Poverty Level")
-# ax.set_title("Linear Regression")
-# print 'showing image ploted..'
+
+#COMPONENT COMPONENT
+# fig, ax = plt.subplots(figsize=(12, 8))
+# fig = sm.graphics.plot_ccpr(res, "x1", ax=ax)
+
+
+# prstd, iv_l, iv_u = wls_prediction_std(res)
+
+# fig, ax = plt.subplots(figsize=(8,6))
+
+# ax.plot(x, y, 'o', label="Data")
+# ax.plot(x, y, 'b-', label="True")
+# ax.plot(x, res.fittedvalues, 'r--.', label="Predicted")
+# ax.plot(x, iv_u, 'r--')
+# ax.plot(x, iv_l, 'r--')
+# legend = ax.legend(loc="best")
+	
+# ax.set_ylabel("Y LABEL")
+# ax.set_xlabel("X LABEL")
+# ax.set_title("Regression PLOT")
+
+
+# plt.scatter(x,y)
+X_plot = np.linspace(0,1,100)
+plt.plot(X_plot, X_plot*res.params[0] + res.params[1])
+
+
 plt.show()
-pylab.show()
-# print 'did it show?'
+
