@@ -17,6 +17,8 @@ incc =          [0.92, 0.31, 0.62, 0.46, 0.95, 1.84, 0.55, 0.59, 0.22, 0.36, 0.3
 cestaBasicaSP = [371.22, 378.86, 379.35, 387.05, 402.05, 392.77, 395.83, 386.04, 383.21, 382.13, 399.21, 412.12]
 ipc =           [1.62, 1.22, 0.70, 1.10, 0.62, 0.47, 0.85, 0.56, 0.66, 0.88, 1.06, 0.82]
 
+indiceCestaBasicaSP = [1.17, 1.02, 1.0013, 1.02, 1.038, 0.97, 1.007, 0.97, 0.99, 0.99, 1.044, 1.032]
+
 dividaLiqSetorPublico = [188500887803209, 187706333799174, 184765806823815, 189770327088739, 190366605999196, 196280910757371, 195081778811247, 192992932469232, 190601887177971, 197251356355572, 20275100009607, 2136888008451]
 indiceBovespa =         [46907.68, 51583.09, 51150.16, 56229.38, 52760.47, 53080.88, 50864.77, 46625.50, 45059.30, 45868.80, 45120.40, 43350.00]
 m1 =                    [358633825, 327077519, 326107712, 323948694, 314677519, 304345416, 314876743, 305896812, 303714606, 305882251, 306011809, 311288444]
@@ -36,9 +38,12 @@ taxaCambioComercialVenda =          [2.634228571, 2.81645, 3.139477273, 3.04322,
 # x = np.column_stack((ipa,incc,cestaBasicaSP,ipc,dividaLiqSetorPublico,indiceBovespa,m1,m2,m3,m4,dividaLiqExternaSetorPublico,exportacoesFob,indicePrecosImportacoes,
 # reservasInternacionais,taxaCambioRealEfetivaImportacoes,taxaCambioRealEfetivaExportacoes,taxaCambioComercialCompra,taxaCambioComercialVenda))
 
-y=cestaBasicaSP
-x = np.column_stack((indicePrecosImportacoes,taxaCambioComercialVenda,taxaCambioComercialCompra,taxaCambioRealEfetivaImportacoes,
-	taxaCambioRealEfetivaExportacoes,exportacoesFob))
+y=ipca
+# x = np.column_stack((indicePrecosImportacoes,taxaCambioComercialVenda,taxaCambioComercialCompra,taxaCambioRealEfetivaImportacoes,
+	# taxaCambioRealEfetivaExportacoes,exportacoesFob))
+
+x = np.column_stack((igp,ipa,incc,ipc,taxaCambioComercialCompra,taxaCambioComercialVenda,
+	indicePrecosImportacoes, taxaCambioRealEfetivaExportacoes, taxaCambioRealEfetivaImportacoes,indiceCestaBasicaSP ))
 
 x = sm.add_constant(x, prepend=True) 
 
@@ -66,8 +71,8 @@ print('R2: ', res.rsquared)
 # ax.legend(loc='best');
 
 #PLOTAGEM INFLUENCIA
-# fig, ax = plt.subplots(figsize=(12,8))
-# fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
+#fig, ax = plt.subplots(figsize=(12,8))
+#fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 
 #PART REGRESS
 # fig = plt.figure(figsize=(12,8))
@@ -109,11 +114,7 @@ print('R2: ', res.rsquared)
 # ax.set_xlabel("X LABEL")
 # ax.set_title("Regression PLOT")
 
-
-# plt.scatter(x,y)
-X_plot = np.linspace(0,1,100)
-plt.plot(X_plot, X_plot*res.params[0] + res.params[1])
-
+ 
 
 plt.show()
 
