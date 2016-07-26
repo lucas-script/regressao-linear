@@ -1,0 +1,4 @@
+A plotagem de ajuste traça os valores ajustados 
+vs. uma variável independente escolhida. Ele inclui intervalos
+ de confiança de previsão e, opcionalmente
+traça a verdadeira variável dependente.

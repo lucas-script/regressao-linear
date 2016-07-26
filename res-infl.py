@@ -75,17 +75,21 @@ print('R2: ', res.rsquared)
 # fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 
 #PART REGRESS
-fig = plt.figure(figsize=(12,8))
-fig = sm.graphics.plot_partregress_grid(res, fig=fig)
+# fig = plt.figure(figsize=(12,8))
+# fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 
+#FIT PLOT
+fig, ax = plt.subplots(figsize=(12, 8))
+fig = sm.graphics.plot_fit(res, "x1", ax=ax)
+
+# fig = sm.graphics.plot_fit(res, "x2", ax=ax)
 #LEVERAGE RESID 2
+
+
 # fig, ax = plt.subplots(figsize=(8,6))
 # fig = sm.graphics.plot_leverage_resid2(res, ax=ax)
 
 
-#FIT PLOT
-# fig, ax = plt.subplots(figsize=(12, 8))
-# fig = sm.graphics.plot_fit(res, "x1", ax=ax)
 
 # ou
 
