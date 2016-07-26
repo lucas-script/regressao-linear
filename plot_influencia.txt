@@ -1,0 +1,5 @@
+Plots de Influência  mostram os resíduos (externamente) estudantizados comparada a 
+influência de cada observação.
+
+Residuos estudantizados sao desvios escalados pelo seu desvio padrão.
+Externamente resíduos studentized são resíduos que são escalados pelo seu desvio padrão

@@ -75,8 +75,8 @@ fig, ax = plt.subplots(figsize=(12,8))
 fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 
 #PART REGRESS
-fig = plt.figure(figsize=(12,8))
-fig = sm.graphics.plot_partregress_grid(res, fig=fig)
+# fig = plt.figure(figsize=(12,8))
+# fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 
 #LEVERAGE RESID 2
 # fig, ax = plt.subplots(figsize=(8,6))
@@ -110,9 +110,9 @@ fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 # ax.plot(x, iv_l, 'r--')
 # legend = ax.legend(loc="best")
 	
-# ax.set_ylabel("Y LABEL")
-# ax.set_xlabel("X LABEL")
-# ax.set_title("Regression PLOT")
+ax.set_ylabel("RESIDUOS ESTUDANTIZADOS")
+ax.set_xlabel("INFLUENCIA H")
+ax.set_title("PLOTAGEM DE INFLUENCIA")
 
  
 
