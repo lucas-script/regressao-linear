@@ -1,0 +1,7 @@
+Como estamos fazendo regressao para multiplas variaveis,
+queremos observar o relacionamento entre a variavel dependente dado as 
+variaveis independentes e a variavel independente condicional dado as outras variaveis independentes. Isso é, e(y|x) vs e(x_n | x). 
+
+Outra interpretação: residuos de regressão da variavel de resposta contra as variaveis independentes
+ no eixo y, e os residuos de regressao de uma variavel especifica contra as variaveis independentes
+no eixo x

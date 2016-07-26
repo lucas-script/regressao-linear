@@ -71,12 +71,12 @@ print('R2: ', res.rsquared)
 # ax.legend(loc='best');
 
 #PLOTAGEM INFLUENCIA
-fig, ax = plt.subplots(figsize=(12,8))
-fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
+# fig, ax = plt.subplots(figsize=(12,8))
+# fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 
 #PART REGRESS
-# fig = plt.figure(figsize=(12,8))
-# fig = sm.graphics.plot_partregress_grid(res, fig=fig)
+fig = plt.figure(figsize=(12,8))
+fig = sm.graphics.plot_partregress_grid(res, fig=fig)
 
 #LEVERAGE RESID 2
 # fig, ax = plt.subplots(figsize=(8,6))
@@ -110,9 +110,9 @@ fig = sm.graphics.influence_plot(res, ax=ax, criterion="cooks")
 # ax.plot(x, iv_l, 'r--')
 # legend = ax.legend(loc="best")
 	
-ax.set_ylabel("RESIDUOS ESTUDANTIZADOS")
-ax.set_xlabel("INFLUENCIA H")
-ax.set_title("PLOTAGEM DE INFLUENCIA")
+# ax.set_ylabel("RESIDUOS ESTUDANTIZADOS")
+# ax.set_xlabel("INFLUENCIA H")
+# ax.set_title("PLOTAGEM DE INFLUENCIA")
 
  
 
